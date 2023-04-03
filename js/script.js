@@ -21,9 +21,9 @@ document.addEventListener("DOMContentLoaded", function(){
 
         for(let i = 0; i < saved_notes.length; i++){
 
-            items_code += `<tr>
+            items_code += `<tr class="details">
                                             <td colspan="2" align="left">${saved_notes[i]['item_name']}</td>
-                                            <td><a href=''>Edit</a> | <a href=''>Delete</a></td>
+                                            <td class="det-btn"><a href=''>Edit</a> | <button onClick="del(${saved_notes[i].id}) "><ion-icon name="close-circle"></ion-icon></button></td>
                                     </tr>`
 
 
@@ -36,9 +36,12 @@ document.addEventListener("DOMContentLoaded", function(){
 
     }
 
+    
+
 
 
 })
+
 
 
 
@@ -59,7 +62,12 @@ closeDialog.addEventListener("click", function(event){
 
     createItemDialog.style.display = "none";
 
-})
+});
+
+
+
+
+
 
 
 const createItemForm = document.querySelector("#create-item-form");
@@ -87,7 +95,8 @@ function saveItem(item_name, item_category){
     //save to localStorage
     const list_object = {
         item_name: item_name,
-        item_category: item_category
+        item_category: item_category,
+        id: Date.now()
     }
 
     //check if the storage exists already
@@ -113,6 +122,8 @@ function saveItem(item_name, item_category){
 }
 
 
+
+
 function getSavedNotes(){
 
     let result = localStorage.getItem("lists");
@@ -127,4 +138,19 @@ function getSavedNotes(){
 
     }
 
+};
+
+
+function del(id) {
+    console.log(id);
+
+    let getstore = JSON.parse(localStorage.getItem('lists'))
+    let del = getstore.filter((saved_notes) => {
+        // console.log ('hello')
+
+        return saved_notes.id != id;
+    })
+    localStorage.setItem("lists", JSON.stringify(del));
+    location.reload()
 }
+
