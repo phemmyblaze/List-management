@@ -4,42 +4,62 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List management Application</title>
-
-    <link rel="stylesheet" href="./thirdparties/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./style/style.css">
+    <title>List management</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-    
-    <div class="heading">
-        <div class="nav-list">
-            <img src="" alt="">
+    <main class="main">
 
-            <ul class="navi">
-                <li> <a href="#">Home</a> </li>
-                <li> <a href="#">List Page</a> </li>
-                <li> <a href="#">Contact</a> </li>
-            </ul>
+        <div class="container">
+                <a href="#" class="create-list-btn" onclick="createNewItem(event)">Create New</a>
+                
+                <div class="list-area">
+                    <div>
+                        <h3>You have 0 items in your list</h3>
+                        <div id="lists"></div>
+                    </div>
+
+                    <div class="list-items-content">
+                           
+                    </div>
+                </div>
+
+
         </div>
-    </div>
 
-    <div class="main">
-        <h2>Add new list</h2>
+        <!-- Modal for creating List item -->
+        <div class="create-item-dialog">
+            <a href="#" class="close-dialog">Close</a>
 
-        <div class="input-details">
+            <div class="form-area">
+                <h3>Create New List</h3>
+                <form class="form" action="#" method="POST" id="create-item-form">
+                    <div class="form-group">
+                        <label>Item Name</label>
+                        <input type="text" class="form-control" name="item_name">
+                    </div>
 
-            <input type="text">
+                    <div class="form-group">
+                        <label>Item Category</label>
+                        <select class="form-control" name="item_category">
+                            <option value="general">General</option>
+                            <option value="private">Private</option>
+                        </select>
+                    </div>
 
-            <button>Add</button>
+                    <div class="form-group">
+                       <button class="btn btn-primary">Create Item</button>
+                    </div>
+                </form>
+
+            </div>
         </div>
-        
-    </div>
+        <!-- End of Moda for creating list item -->
 
+    </main>
     
-
-    <script src="./thirdparties/jquery/jquery.min.js"></script>
-    <script src="./thirdparties/bootstrap/js/bootstrap.min.js"></script>
-    <script src="./script/script.js"></script>
+    <script src="thirdparties/jquery.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
