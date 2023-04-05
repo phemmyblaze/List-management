@@ -22,17 +22,25 @@ document.addEventListener("DOMContentLoaded", function(){
         for(let i = 0; i < saved_notes.length; i++){
 
             items_code += `<tr class="details">
-                                            <td colspan="2" align="left">${saved_notes[i]['item_name']}</td>
-                                            <td class="det-btn"><a href=''>Edit</a> | <button onClick="del(${saved_notes[i].id}) "><ion-icon name="close-circle"></ion-icon></button></td>
+                                            <td  class="input-controller"><input type="text" disabled value=" ${saved_notes[i]['item_name']}" class="input-result"> </td>
+                                            <td class="det-btn"><a href='' class="editBtn">EDIT</a>   <span class="update-controller"><a href='' class="saveBtn">SAVE</a></span> <button onClick="del(${saved_notes[i].id}) "><ion-icon name="close-circle"></ion-icon></button></td>
+                                           
+                                           
                                     </tr>`
 
-
+                                    
         }
         items_code += `</tbody>
                                             </table>
                                             `
 
         list_items_content.innerHTML = items_code;
+        
+        activateEditListeners()
+        activateSaveListeners()
+        
+        
+
 
     }
 
@@ -41,6 +49,40 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
 })
+
+function activateEditListeners(){
+    const editBtn = document.querySelectorAll(".editBtn")
+    const updateController = document.querySelectorAll(".update-controller")
+    const inputs = document.querySelectorAll(".input-controller input ")
+
+    editBtn.forEach((eb, i)=>{
+        eb.addEventListener("click", (e)=>{
+            e.preventDefault()
+            updateController[i].style.display = "block"
+            inputs[i].disabled = false
+        })
+
+    })
+}
+
+function activateSaveListeners(){
+    const saveBtn = document.querySelectorAll(".saveBtn")
+    const inputs = document.querySelectorAll(".input-controller input")
+
+    saveBtn.forEach((sb, i)=>{
+        sb.addEventListener("click", ()=>{
+            updateItem(inputs[i].value)
+        })
+    })
+}
+
+function updateItem(text, i){
+list_storage[i] = text
+    localStorage.setItem("lists", JSON.stringify(list_storage)) 
+    // location.reload()
+}
+
+
 
 
 
